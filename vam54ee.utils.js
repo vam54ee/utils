@@ -9,6 +9,21 @@ function gcd (a,b)
   return gcd(b,a%b);
 }
 
+function compare(a,b)
+{
+  return a-b;
+}
+
+function sort(arr)
+{
+  arr.sort(compare);
+}
+
+
+function noOfDigits(num)
+{
+  return num.toString().length;
+}
 //limit should be greater than 10;
 function generateStringSieve(lim)
 {
@@ -191,6 +206,8 @@ function now(x){
 
 
 module.exports = {
+  sort:sort,
+  noOfDigits:noOfDigits,
   gcd:gcd,
   generateStringSieve:generateStringSieve,
   generateSieve:generateSieve,
