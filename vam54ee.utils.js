@@ -192,6 +192,32 @@ function isRightTruncHarshad(n)
   return true;
 }
 
+function Combination(arr,len,cb)
+{
+  var subset = [];
+  function nextElement(arr,index,count)
+  {
+    if(count === len -1)
+    {
+      for(var j = index; j < arr.length ;j++)
+      {
+        subset.push(arr[j]);
+        cb(subset.slice());
+        subset.pop();
+      }
+    }
+    else
+    {
+      for(var j = index; j <= arr.length - len+count ;j++)
+      {
+        subset.push(arr[j]);
+        nextElement(arr,j+1,count+1);
+        subset.pop();
+      }
+    }
+  }
+
+
 function start(x)
 {
   x?x=  (new Date()).getTime():dt = (new Date()).getTime();
@@ -219,6 +245,7 @@ module.exports = {
   isPerfectSquare:isPerfectSquare,
   isHarshad:isHarshad,
   isRightTruncHarshad:isRightTruncHarshad,
+  combination:Combination,
   start:start,
   now:now
 }
