@@ -242,6 +242,7 @@ function Combination(arr,len,cb)
       }
     }
   }
+}
 
 
 function start(x)
