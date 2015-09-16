@@ -192,6 +192,32 @@ function isRightTruncHarshad(n)
   return true;
 }
 
+
+function isAnagram(str1,str2)
+{
+  if(str1.length!== str2.length)
+    return false;
+  var arr1 = [];
+  var arr2 = [];
+  for(var i = 0; i < str1.length;i++)
+  {
+    if(arr1[(str1[i].charCodeAt(0))] === undefined)
+      arr1[(str1[i].charCodeAt(0)) ] = 0;
+    arr1[(str1[i].charCodeAt(0)) ]++;
+    if(arr2[(str2[i].charCodeAt(0))] === undefined)
+      arr2[(str2[i].charCodeAt(0))] = 0;
+    arr2[(str2[i].charCodeAt(0)) ]++;
+  }
+  for(var i = 0; i < arr1.length;i++)
+  {
+    if(arr1[i]!==arr2[i])
+      return false;
+  }
+  return true;
+  
+}
+
+
 function Combination(arr,len,cb)
 {
   var subset = [];
@@ -245,6 +271,7 @@ module.exports = {
   isPerfectSquare:isPerfectSquare,
   isHarshad:isHarshad,
   isRightTruncHarshad:isRightTruncHarshad,
+  isAnagram:isAnagram,
   combination:Combination,
   start:start,
   now:now
