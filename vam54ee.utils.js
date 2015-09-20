@@ -217,6 +217,46 @@ function isAnagram(str1,str2)
   
 }
 
+function generateTotient(num,primesArray)
+{
+  if(primesArray === undefined)
+  {
+    primesArray = generateSieve(num);
+  }
+  console.log(primesArray.slice(0,1));
+  var totient = [0,1];
+  for(var i = 0 ; i < primesArray.length; i++)
+    totient[primesArray[i]]=primesArray[i]-1;
+  //console.log(primesArray[0]);
+  for(var i = 0 ; i < primesArray.length ; i++)
+  {
+    for(var j = 2; Math.pow(primesArray[i],j)<num;j++)
+    {//console.log(primesArray[i],j);
+      totient[Math.pow(primesArray[i],j)]=Math.pow(primesArray[i],j) - Math.pow(primesArray[i],j-1);
+    }
+  }
+  //console.log(totient);
+  for(var i = 0; i < primesArray.length;i++)
+  {
+    for(var j = i+1 ; primesArray[i]*primesArray[j] < num; j++)
+    {
+      //console.log(i,j);
+      totient[primesArray[i]*primesArray[j]] = totient[primesArray[i]]*totient[primesArray[j]];
+    }
+  }
+  //console.log(totient);
+  for(var i = 2 ; i < num; i++)
+  {
+    for(var j = i+1; j*i < num;j++)
+    {
+      //console.log(i,j);
+      if(gcd(i,j) === 1)
+      totient[i*j] = totient[i]*totient[j];
+    }
+  }
+  return totient;
+}
+
 
 function Combination(arr,len,cb)
 {
@@ -242,6 +282,13 @@ function Combination(arr,len,cb)
       }
     }
   }
+  for(var i = 0; i <= arr.length - len; i++)
+  {
+    subset.push(arr[i]);
+    nextElement(arr,i+1,1);
+    subset.pop();
+  }
+//return subsetArray;
 }
 
 
@@ -273,6 +320,7 @@ module.exports = {
   isHarshad:isHarshad,
   isRightTruncHarshad:isRightTruncHarshad,
   isAnagram:isAnagram,
+  generateTotient:generateTotient,
   combination:Combination,
   start:start,
   now:now
